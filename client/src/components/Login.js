@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-//import { LoginUser } from "../utils/api"
+import { LoginUser } from "../utils/api"
 
 export default function Login(props) {
   const [credentials, setCredentials] = useState({
@@ -15,7 +15,7 @@ export default function Login(props) {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      //await LoginUser(credentials)
+      await LoginUser(credentials)
       props.history.push("/")
     } catch (error) {
       const status = error.response && error.response.status

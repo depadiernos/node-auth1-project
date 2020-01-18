@@ -1,11 +1,10 @@
 import React, { useState } from "react"
-// import { SignupUser, LoginUser } from "../utils/api"
+import { SignupUser, LoginUser } from "../utils/api"
 
 export default function Signup(props) {
   const [account, setAccount] = useState({
     username: "",
-    password: "",
-    email: ""
+    password: ""
   })
 
   const [error, setError] = useState()
@@ -17,12 +16,12 @@ export default function Signup(props) {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      // await SignupUser(account)
+      await SignupUser(account)
       try {
-        // await LoginUser({
-        //   username: account.username,
-        //   password: account.password
-        // })
+        await LoginUser({
+          username: account.username,
+          password: account.password
+        })
         props.history.push("/")
       } catch (error) {
         const status = error.response && error.response.status
@@ -38,15 +37,6 @@ export default function Signup(props) {
   return (
     <form onSubmit={handleSubmit}>
       {error && <div>{error}</div>}
-      <br />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={account.email}
-        onChange={handleChange}
-        required
-      />
       <br />
       <input
         type="text"

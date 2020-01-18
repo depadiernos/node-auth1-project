@@ -1,14 +1,10 @@
 import axios from "axios"
 
-export function getToken() {
-  return localStorage.getItem("token")
-}
 
-export default function() {
+export const api = () => {
   return axios.create({
     baseURL: "http://localhost:4000",
     headers: {
-      Authorization: getToken(),
       "Content-Type": "application/json"
     }
   })
@@ -16,7 +12,6 @@ export default function() {
 
 export const LoginUser = async (credentials) => {
   const res = await api().post("/api/login", credentials)
-  setToken(res.data.token)
   return res.data
 }
 
