@@ -4,6 +4,7 @@ import axios from "axios"
 export const api = () => {
   return axios.create({
     baseURL: "http://localhost:4000",
+    withCredentials: true,
     headers: {
       "Content-Type": "application/json"
     }
@@ -20,7 +21,8 @@ export const SignupUser = async (user) => {
   return res.data
 }
 
-export const GetUsers = async (entry) => {
-  const res = await api().post("/api/users/", entry)
+export const GetUsers = async () => {
+  const res = await api().get("/api/users/")
+  console.log(res)
   return res.data
 }

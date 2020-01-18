@@ -11,7 +11,10 @@ const server = express()
 const port = process.env.PORT || 4000
 
 server.use(helmet())
-server.use(cors())
+server.use(cors(({
+  credentials: true,
+  origin: "http://localhost:3000"
+})))
 server.use(express.json())
 server.use(
   session({
@@ -19,8 +22,8 @@ server.use(
     saveUninitialized: false,
     secret: "supersecret",
     cookie: {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24,
+      httpOnly: false,
+      maxAge: 1000 * 60 * 60,
       secure: process.env.NODE_ENV === "production" ? true : false
     },
     store: new KnexSessionStore({
